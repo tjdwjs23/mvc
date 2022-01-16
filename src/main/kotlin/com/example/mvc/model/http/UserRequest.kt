@@ -3,7 +3,6 @@ package com.example.mvc.model.http
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class) // snake_case
 data class UserRequest (
     var name:String?=null,
     var age:Int?=null,
@@ -11,4 +10,3 @@ data class UserRequest (
     var address:String?=null,
     var phoneNumber:String?=null    // phone_number
 )
-
