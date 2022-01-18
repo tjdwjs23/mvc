@@ -3,7 +3,11 @@ package com.example.mvc.controller.put
 import com.example.mvc.model.http.Result
 import com.example.mvc.model.http.UserRequest
 import com.example.mvc.model.http.UserResponse
+import org.springframework.http.ResponseEntity
+import org.springframework.validation.BindingResult
+import org.springframework.validation.FieldError
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api")
@@ -20,8 +24,22 @@ class PutApiController {
     }
 
     @PutMapping(path = ["/put-mapping/object"])
-    fun putMappingObject(@RequestBody userRequest: UserRequest): UserResponse {
-        // 0. Response
+    fun putMappingObject(@Valid @RequestBody userRequest: UserRequest, bindingResult: BindingResult): ResponseEntity<String> {  // @Valid bean 검증 //bindingResult 에러출력
+
+        if(bindingResult.hasErrors()) {  // bindingResult가 Error를 가지고있다면
+            // 500 error
+            val msg = StringBuilder()
+            bindingResult.allErrors.forEach {
+                val field = it as FieldError    // 형변환
+                val message = it.defaultMessage
+                msg.append(field.field+" : "+message+"\n")
+            }
+            return ResponseEntity.badRequest().body(msg.toString())
+        }
+
+        return ResponseEntity.ok("")
+
+        /*// 0. Response
         return UserResponse().apply {
             // 1. result
             this.result = Result().apply {
@@ -52,7 +70,7 @@ class PutApiController {
             })
 
             this.userRequest = userList
-        }
+    .ok    }*/
 
     }
 }

@@ -14,7 +14,6 @@ class ResponseApiController {
     // GET localhost:8080/api/response
     @GetMapping("")
     fun getMapping(@RequestParam age : Int?): ResponseEntity<String> { // (requied = true) default가 트루 // ? 엘비스연산자 -> null일 수 있다.
-
         return age?.let {
             // age not null
             if(it < 20){
