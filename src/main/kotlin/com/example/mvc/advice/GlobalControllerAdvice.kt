@@ -4,7 +4,6 @@ import com.example.mvc.controller.exception.ExceptionApiController
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.web.bind.annotation.RestControllerAdvice
 
 //@RestControllerAdvice(basePackageClasses = [ExceptionApiController::class]) // class지정가능 안하면 전체
 class GlobalControllerAdvice {
